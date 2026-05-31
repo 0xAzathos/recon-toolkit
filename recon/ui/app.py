@@ -8,7 +8,7 @@ from textual.widgets import (
     Button, DataTable, Footer, Header, Input, Label,
     ListItem, ListView, Select, Static, TextArea, TabbedContent, TabPane
 )
-from textual.text import Text as TxText
+from rich.text import Text as TxText
 
 from recon import __version__
 from recon import db
