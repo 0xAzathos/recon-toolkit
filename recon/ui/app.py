@@ -1,5 +1,6 @@
 """Main TUI application for recon-toolkit."""
 
+import re
 from pathlib import Path
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -157,8 +158,9 @@ class ReconApp(App):
         lv = self.query_one("#eng_list", ListView)
         lv.clear()
         for eng in db.list_engagements():
-            name = eng["name"]
-            item = ListItem(Label(name), id=f"eng_{name.replace('.','_').replace('-','_')}")
+            name    = eng["name"]
+            safe_id = re.sub(r'[^a-zA-Z0-9_-]', '_', name)
+            item    = ListItem(Label(name), id=f"eng_{safe_id}")
             if name == self.active_engagement:
                 item.add_class("active_eng")
             lv.append(item)
