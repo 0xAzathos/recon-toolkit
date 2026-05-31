@@ -167,7 +167,7 @@ class ReconApp(App):
 
     def on_list_view_selected(self, e: ListView.Selected) -> None:
         label = e.item.query_one(Label)
-        name  = str(label.renderable)
+        name  = label.renderable if isinstance(label.renderable, str) else str(label.renderable)
         self.active_engagement = name
         self._load_engagements()
         self._refresh_all()
