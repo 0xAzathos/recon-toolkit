@@ -169,7 +169,6 @@ class ReconApp(App):
         label = e.item.query_one(Label)
         name  = str(label.content)
         self.active_engagement = name
-        self._load_engagements()
         self._refresh_all()
         self.notify(f"Engagement: {name}", severity="information")
 
