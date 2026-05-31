@@ -221,7 +221,7 @@ Button {
     padding: 2;
     width: 82%;
     height: 84%;
-    margin: 3 9%;
+    margin: 3 9;
 }
 
 #help_container Markdown {
@@ -240,7 +240,7 @@ Button {
     width: 68%;
     height: auto;
     max-height: 86%;
-    margin: 2 16%;
+    margin: 2 16;
     overflow-y: auto;
 }
 
