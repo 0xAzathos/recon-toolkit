@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recon-toolkit"
+version = "1.0.0"
+description = "Personal VDP and bug bounty recon toolkit with TUI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Sam" }]
+dependencies = [
+    "rich>=13.0",
+    "textual>=0.80",
+]
+
+[project.scripts]
+recon = "recon.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["recon*"]

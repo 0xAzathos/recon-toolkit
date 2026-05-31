@@ -1,0 +1,2 @@
+[console_scripts]
+recon = recon.__main__:main

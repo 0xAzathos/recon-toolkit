@@ -1,0 +1,255 @@
+/* recon-toolkit TUI stylesheet */
+
+Screen {
+    background: #0d1117;
+}
+
+Header {
+    background: #161b22;
+    color: #58a6ff;
+    height: 3;
+}
+
+Footer {
+    background: #161b22;
+    color: #8b949e;
+}
+
+/* ── Sidebar ── */
+
+#sidebar {
+    width: 26;
+    background: #161b22;
+    border-right: solid #30363d;
+    padding: 1 1;
+}
+
+#sidebar_label {
+    color: #58a6ff;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#sidebar ListView {
+    background: transparent;
+    height: 1fr;
+}
+
+#sidebar ListItem {
+    background: transparent;
+    color: #c9d1d9;
+    padding: 0 1;
+}
+
+#sidebar ListItem:hover {
+    background: #21262d;
+}
+
+#sidebar ListItem.active_eng {
+    color: #58a6ff;
+    text-style: bold;
+    background: #1f2937;
+}
+
+#sidebar Button {
+    width: 100%;
+    margin-top: 1;
+}
+
+/* ── Main area ── */
+
+#main_area {
+    padding: 1 2;
+}
+
+TabbedContent {
+    height: 100%;
+}
+
+TabPane {
+    padding: 1;
+}
+
+/* ── Section titles ── */
+
+.section_title {
+    color: #58a6ff;
+    text-style: bold;
+    padding: 0 1;
+    margin-bottom: 1;
+    background: #161b22;
+    border: solid #30363d;
+}
+
+/* ── Tables ── */
+
+DataTable {
+    height: auto;
+    max-height: 28;
+}
+
+DataTable > .datatable--header {
+    background: #161b22;
+    color: #58a6ff;
+}
+
+DataTable > .datatable--cursor {
+    background: #1f6feb;
+}
+
+DataTable > .datatable--even-row {
+    background: #0d1117;
+}
+
+DataTable > .datatable--odd-row {
+    background: #111820;
+}
+
+/* ── Inputs ── */
+
+TextArea {
+    height: 10;
+    border: solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+}
+
+Input {
+    border: solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+}
+
+Select {
+    border: solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+}
+
+/* ── Buttons ── */
+
+Button {
+    margin: 0 1;
+}
+
+.btn_p1 {
+    background: #6e1a1a;
+    color: #ff7b72;
+    border: solid #a33030;
+}
+
+.btn_p2 {
+    background: #5a3e1b;
+    color: #ffa657;
+    border: solid #8a5e2a;
+}
+
+.btn_p3 {
+    background: #1b3a2a;
+    color: #3fb950;
+    border: solid #2a5c3f;
+}
+
+.btn_p4 {
+    background: #21262d;
+    color: #8b949e;
+    border: solid #30363d;
+}
+
+.filter_btn {
+    min-width: 6;
+}
+
+.active_filter {
+    background: #1f6feb;
+    color: #ffffff;
+    border: solid #58a6ff;
+}
+
+/* ── Triage ── */
+
+#filter_row {
+    height: 3;
+    margin-bottom: 1;
+}
+
+#triage_action_row {
+    height: 3;
+    margin-bottom: 1;
+}
+
+#triage_output {
+    border: solid #30363d;
+    background: #0d1117;
+    height: 22;
+}
+
+/* ── Headers ── */
+
+#header_output {
+    border: solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 1;
+    height: 22;
+}
+
+#header_scroll {
+    height: 24;
+}
+
+/* ── Scope ── */
+
+#scope_area {
+    height: 12;
+}
+
+#scope_spacer {
+    height: 1;
+}
+
+#scope_check_result {
+    margin-top: 1;
+    padding: 0 1;
+}
+
+/* ── Modals ── */
+
+#help_container {
+    background: #161b22;
+    border: solid #58a6ff;
+    padding: 2;
+    width: 82%;
+    height: 84%;
+    margin: 3 9%;
+}
+
+#help_container Markdown {
+    height: 1fr;
+    overflow-y: auto;
+    background: #161b22;
+    color: #c9d1d9;
+}
+
+#finding_modal,
+#note_modal,
+#eng_modal {
+    background: #161b22;
+    border: solid #58a6ff;
+    padding: 2;
+    width: 68%;
+    height: auto;
+    max-height: 86%;
+    margin: 2 16%;
+    overflow-y: auto;
+}
+
+#finding_modal TextArea {
+    height: 5;
+}
+
+#modal_title {
+    color: #58a6ff;
+    text-style: bold;
+    margin-bottom: 1;
+}
