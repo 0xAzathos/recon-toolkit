@@ -176,7 +176,6 @@ class ReconApp(App):
         if result:
             if db.create_engagement(result["name"], result.get("scope", "")):
                 self.active_engagement = result["name"]
-                self._load_engagements()
                 self._refresh_all()
                 self.notify(f"Created: {result['name']}", severity="information")
             else:
