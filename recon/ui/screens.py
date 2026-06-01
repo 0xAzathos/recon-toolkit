@@ -2,9 +2,9 @@
 
 from textual.app import ComposeResult
 from textual.binding import Binding
-from textual.containers import Container, Horizontal
+from textual.containers import Container, Horizontal, Vertical
 from textual.screen import ModalScreen
-from textual.widgets import Button, Input, Label, Markdown, Select, TextArea
+from textual.widgets import Button, Checkbox, Input, Label, Markdown, Select, TextArea
 
 from recon import __version__
 from recon.triage import PRIORITY_CRITERIA, PRIORITY_LABELS
@@ -263,5 +263,61 @@ class NewEngagementScreen(ModalScreen):
             if not name:
                 return
             self.dismiss({"name": name, "scope": scope})
+        else:
+            self.dismiss(None)
+
+
+class ExportTriageScreen(ModalScreen):
+    BINDINGS = [Binding("escape", "dismiss", "Cancel")]
+
+    COLUMNS = [
+        ("priority", "Priority"),
+        ("status",   "Status"),
+        ("host",     "Host"),
+        ("title",    "Title"),
+        ("tech",     "Tech"),
+        ("tags",     "Tags"),
+        ("ip",       "IP"),
+    ]
+
+    def __init__(self, tier: str = "all"):
+        super().__init__()
+        self.tier = tier
+
+    def compose(self) -> ComposeResult:
+        tier_label = self.tier.upper() if self.tier != "all" else "All"
+        yield Container(
+            Label(f"Export Triage — {tier_label}", id="modal_title"),
+            Label("Format"),
+            Select(
+                [("Markdown table (.md)", "md"), ("CSV (.csv)", "csv"), ("Host list (.txt)", "txt")],
+                value="md",
+                id="ex_format",
+            ),
+            Label("Columns to include"),
+            Vertical(
+                *[
+                    Checkbox(label, value=(key != "tags"), id=f"col_{key}")
+                    for key, label in self.COLUMNS
+                ],
+                id="col_checkboxes",
+            ),
+            Horizontal(
+                Button("Export", id="do_export", variant="success"),
+                Button("Cancel", id="cancel_export", variant="default"),
+            ),
+            id="export_modal",
+        )
+
+    def on_button_pressed(self, e: Button.Pressed):
+        if e.button.id == "do_export":
+            fmt  = self.query_one("#ex_format", Select).value
+            cols = [
+                key for key, _ in self.COLUMNS
+                if self.query_one(f"#col_{key}", Checkbox).value
+            ]
+            if not cols:
+                return
+            self.dismiss({"format": fmt, "columns": cols, "tier": self.tier})
         else:
             self.dismiss(None)

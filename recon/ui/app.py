@@ -15,8 +15,9 @@ from recon import __version__
 from recon import db
 from recon.triage import triage_lines, count_by_priority
 from recon.headers import analyze_headers, score_label
-from recon.export import export_findings_md, export_triage_txt
+from recon.export import export_findings_md, export_triage_txt, export_triage_csv, export_triage_md
 from recon.ui.screens import (
+    ExportTriageScreen,
     HelpScreen, AddFindingScreen, AddNoteScreen, NewEngagementScreen
 )
 
@@ -176,6 +177,7 @@ class ReconApp(App):
         if result:
             if db.create_engagement(result["name"], result.get("scope", "")):
                 self.active_engagement = result["name"]
+                self._load_engagements()
                 self._refresh_all()
                 self.notify(f"Created: {result['name']}", severity="information")
             else:
@@ -317,7 +319,22 @@ class ReconApp(App):
     def _export_triage(self, tier: str) -> None:
         if not self.triage_data:
             self.notify("Run triage first", severity="warning"); return
-        path = export_triage_txt(self.active_engagement or "export", self.triage_data, tier)
+        self.push_screen(ExportTriageScreen(tier), self._on_export_triage_done)
+
+    def _on_export_triage_done(self, result) -> None:
+        if not result:
+            return
+        tier    = result["tier"]
+        fmt     = result["format"]
+        cols    = result["columns"]
+        eng     = self.active_engagement or "export"
+        data    = self.triage_data
+        if fmt == "txt":
+            path = export_triage_txt(eng, data, tier)
+        elif fmt == "csv":
+            path = export_triage_csv(eng, data, tier, cols)
+        else:
+            path = export_triage_md(eng, data, tier, cols)
         self.notify(f"Exported to {path}", severity="information")
 
     # ─── Findings actions ──────────────────────────────────────────────────────
